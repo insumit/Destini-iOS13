@@ -14,11 +14,23 @@ class ViewController: UIViewController {
     @IBOutlet weak var choice1Button: UIButton!
     @IBOutlet weak var choice2Button: UIButton!
     
+    var storyBrain = StoryBrain()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        updateUI()
     }
-
-
+    
+    @IBAction func buttonAction(_ sender: UIButton) {
+        storyBrain.nextStory(sender.currentTitle!)
+        updateUI()
+    }
+    
+    func updateUI() {
+        let story = storyBrain.storyLine[storyBrain.storyNumber]
+        storyLabel.text = story.title
+        choice1Button.setTitle(story.choice1, for: .normal)
+        choice2Button.setTitle(story.choice2, for: .normal)
+    }
 }
 
